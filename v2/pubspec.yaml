@@ -1,0 +1,39 @@
+name: pharmacy_management_v2
+description: Pharmacy Management System V2
+publish_to: "none"
+
+version: 2.0.0+1
+
+environment:
+  sdk: ">=3.8.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+
+  # Local database
+  sqflite: ^2.4.2
+  path: ^1.9.1
+
+  # Barcode scanner
+  mobile_scanner: ^7.0.1
+
+  # Password hashing
+  crypto: ^3.0.6
+
+  # State management
+  provider: ^6.1.5
+
+  # Date formatting
+  intl: ^0.20.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
