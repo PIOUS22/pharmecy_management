@@ -1,0 +1,49 @@
+name: Build Pharmacy V2 APK
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-v2:
+    name: Build V2 APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Check Flutter
+        run: flutter --version
+
+      - name: Create Android platform
+        working-directory: v2
+        run: |
+          flutter create \
+            --project-name pharmacy_management_v2 \
+            --org com.pious \
+            --platforms android \
+            .
+
+      - name: Get dependencies
+        working-directory: v2
+        run: flutter pub get
+
+      - name: Analyze project
+        working-directory: v2
+        run: flutter analyze
+
+      - name: Build APK
+        working-directory: v2
+        run: flutter build apk --release
+
+      - name: Upload V2 APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: pharmacy-management-v2-apk
+          path: v2/build/app/outputs/flutter-apk/app-release.apk
