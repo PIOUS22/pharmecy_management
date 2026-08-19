@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
     const MedicinesScreen(),
     const PrescriptionScreen(),
     const PurchaseScreen(),
-    const SupplierScreen(),
+    const SuppliersScreen(),
     const ExpensesScreen(),
     const ReportsScreen(),
   ];
