@@ -1,11 +1,4 @@
 import 'package:flutter/material.dart';
-import 'home_screen.dart';
-
-import '../services/auth_service.dart';
-import 'dashboard_screen.dart';
-
-class LoginScreen extends StatefulWidget {
-import 'package:flutter/material.dart';
 
 import '../services/auth_service.dart';
 import 'home_screen.dart';
@@ -14,12 +7,17 @@ class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<LoginScreen> createState() {
+    return _LoginScreenState();
+  }
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final usernameController = TextEditingController();
-  final passwordController = TextEditingController();
+  final TextEditingController usernameController =
+      TextEditingController();
+
+  final TextEditingController passwordController =
+      TextEditingController();
 
   bool loading = false;
   bool obscurePassword = true;
@@ -58,7 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (_) => const HomeScreen(),
+          builder: (context) => const HomeScreen(),
         ),
       );
     } catch (e) {
@@ -89,7 +87,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     size: 80,
                   ),
                   const SizedBox(height: 20),
-
                   const Text(
                     'Pharmacy Management',
                     textAlign: TextAlign.center,
@@ -98,16 +95,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-
                   const SizedBox(height: 6),
-
-                  Text(
-                    'Version 2.0',
-                    style: TextStyle(
-                      color: Colors.grey,
-                    ),
-                  ),
-
+                  const Text('Version 2.0'),
                   const SizedBox(height: 35),
 
                   TextField(
@@ -148,10 +137,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 15),
 
                   if (errorMessage != null)
-                    Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(12),
-                      margin: const EdgeInsets.only(
+                    Padding(
+                      padding: const EdgeInsets.only(
                         bottom: 15,
                       ),
                       child: Text(
@@ -167,8 +154,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       onPressed: loading ? null : login,
                       child: loading
                           ? const SizedBox(
-                              height: 22,
                               width: 22,
+                              height: 22,
                               child: CircularProgressIndicator(),
                             )
                           : const Text(
@@ -183,12 +170,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   const SizedBox(height: 20),
 
-                  Text(
+                  const Text(
                     'Default admin account: admin / admin123',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 12,
-                      color: Colors.grey,
                     ),
                   ),
                 ],
