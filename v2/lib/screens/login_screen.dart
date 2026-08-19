@@ -5,6 +5,12 @@ import '../services/auth_service.dart';
 import 'dashboard_screen.dart';
 
 class LoginScreen extends StatefulWidget {
+import 'package:flutter/material.dart';
+
+import '../services/auth_service.dart';
+import 'home_screen.dart';
+
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
@@ -12,15 +18,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final usernameController =
-      TextEditingController();
-
-  final passwordController =
-      TextEditingController();
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
 
   bool loading = false;
   bool obscurePassword = true;
-
   String? errorMessage;
 
   @override
@@ -39,8 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
     });
 
     try {
-      final user =
-          await AuthService.instance.login(
+      final user = await AuthService.instance.login(
         usernameController.text,
         passwordController.text,
       );
@@ -50,21 +51,15 @@ class _LoginScreenState extends State<LoginScreen> {
       if (user == null) {
         setState(() {
           loading = false;
-          errorMessage =
-              'Username অথবা password ভুল';
+          errorMessage = 'Username অথবা password ভুল';
         });
         return;
       }
 
-      /*Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (_) => const DashboardScreen(),
-        ),*/
       Navigator.of(context).pushReplacement(
-  MaterialPageRoute(
-    builder: (_) => const HomeScreen(),
-  ),
-);
+        MaterialPageRoute(
+          builder: (_) => const HomeScreen(),
+        ),
       );
     } catch (e) {
       if (!mounted) return;
@@ -93,7 +88,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     Icons.local_pharmacy,
                     size: 80,
                   ),
-
                   const SizedBox(height: 20),
 
                   const Text(
@@ -110,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Text(
                     'Version 2.0',
                     style: TextStyle(
-                      color: Colors.grey.shade600,
+                      color: Colors.grey,
                     ),
                   ),
 
@@ -118,15 +112,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   TextField(
                     controller: usernameController,
-                    textInputAction:
-                        TextInputAction.next,
-                    decoration:
-                        const InputDecoration(
+                    textInputAction: TextInputAction.next,
+                    decoration: const InputDecoration(
                       labelText: 'Username',
-                      prefixIcon:
-                          Icon(Icons.person),
-                      border:
-                          OutlineInputBorder(),
+                      prefixIcon: Icon(Icons.person),
+                      border: OutlineInputBorder(),
                     ),
                   ),
 
@@ -136,28 +126,22 @@ class _LoginScreenState extends State<LoginScreen> {
                     controller: passwordController,
                     obscureText: obscurePassword,
                     onSubmitted: (_) => login(),
-                    decoration:
-                        InputDecoration(
+                    decoration: InputDecoration(
                       labelText: 'Password',
-                      prefixIcon:
-                          const Icon(Icons.lock),
+                      prefixIcon: const Icon(Icons.lock),
                       suffixIcon: IconButton(
                         onPressed: () {
                           setState(() {
-                            obscurePassword =
-                                !obscurePassword;
+                            obscurePassword = !obscurePassword;
                           });
                         },
                         icon: Icon(
                           obscurePassword
-                              ? Icons
-                                  .visibility
-                              : Icons
-                                  .visibility_off,
+                              ? Icons.visibility
+                              : Icons.visibility_off,
                         ),
                       ),
-                      border:
-                          const OutlineInputBorder(),
+                      border: const OutlineInputBorder(),
                     ),
                   ),
 
@@ -166,23 +150,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   if (errorMessage != null)
                     Container(
                       width: double.infinity,
-                      padding:
-                          const EdgeInsets.all(12),
-                      margin:
-                          const EdgeInsets.only(
+                      padding: const EdgeInsets.all(12),
+                      margin: const EdgeInsets.only(
                         bottom: 15,
-                      ),
-                      decoration:
-                          BoxDecoration(
-                        borderRadius:
-                            BorderRadius.circular(
-                          8,
-                        ),
                       ),
                       child: Text(
                         errorMessage!,
-                        textAlign:
-                            TextAlign.center,
+                        textAlign: TextAlign.center,
                       ),
                     ),
 
@@ -190,22 +164,18 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: double.infinity,
                     height: 52,
                     child: FilledButton(
-                      onPressed:
-                          loading ? null : login,
+                      onPressed: loading ? null : login,
                       child: loading
                           ? const SizedBox(
                               height: 22,
                               width: 22,
-                              child:
-                                  CircularProgressIndicator(),
+                              child: CircularProgressIndicator(),
                             )
                           : const Text(
                               'LOGIN',
-                              style:
-                                  TextStyle(
+                              style: TextStyle(
                                 fontSize: 16,
-                                fontWeight:
-                                    FontWeight.bold,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                     ),
@@ -218,7 +188,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 12,
-                      color: Colors.grey.shade600,
+                      color: Colors.grey,
                     ),
                   ),
                 ],
