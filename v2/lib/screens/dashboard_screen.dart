@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'suppliers_screen.dart';
+import 'supplier_screen.dart';
 
 import '../services/auth_service.dart';
 import 'medicines_screen.dart';
