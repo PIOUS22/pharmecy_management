@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'home_screen.dart';
 
 import '../services/auth_service.dart';
 import 'dashboard_screen.dart';
@@ -55,10 +56,15 @@ class _LoginScreenState extends State<LoginScreen> {
         return;
       }
 
-      Navigator.of(context).pushReplacement(
+      /*Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (_) => const DashboardScreen(),
-        ),
+        ),*/
+      Navigator.of(context).pushReplacement(
+  MaterialPageRoute(
+    builder: (_) => const HomeScreen(),
+  ),
+);
       );
     } catch (e) {
       if (!mounted) return;
