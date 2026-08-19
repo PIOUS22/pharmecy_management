@@ -712,8 +712,10 @@ class _MedicineFormDialogState
                 if (loadingSuppliers)
                   const LinearProgressIndicator()
                 else
-                  DropdownButtonFormField<int?>(
-                    value: selectedSupplierId,
+                  /*DropdownButtonFormField<int?>(
+                    value: selectedSupplierId,*/
+                DropdownButtonFormField<int?>(
+  initialValue: selectedSupplierId,
                     decoration:
                         decoration('Company / Supplier'),
                     items: [
