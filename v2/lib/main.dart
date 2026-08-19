@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
 
-void main() {
+import 'database/app_database.dart';
+import 'screens/login_screen.dart';
+import 'services/auth_service.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await AppDatabase.instance.database;
+
+  await AuthService.instance.initialize();
+
   runApp(const PharmacyV2App());
 }
 
@@ -16,17 +26,7 @@ class PharmacyV2App extends StatelessWidget {
         useMaterial3: true,
         colorSchemeSeed: Colors.green,
       ),
-      home: const Scaffold(
-        body: Center(
-          child: Text(
-            'Pharmacy Management V2',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-      ),
+      home: const LoginScreen(),
     );
   }
 }
