@@ -18,7 +18,9 @@ jobs:
           channel: stable
 
       - name: Install dependencies
+        working-directory: v2
         run: flutter pub get
 
       - name: Analyze
+        working-directory: v2
         run: flutter analyze
