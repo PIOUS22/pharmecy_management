@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import '../services/auth_service.dart';
 import 'dashboard_screen.dart';
 import 'expenses_screen.dart';
+import 'login_screen.dart';
 import 'medicines_screen.dart';
 import 'prescription_screen.dart';
 import 'purchase_screen.dart';
 import 'reports_screen.dart';
 import 'supplier_screen.dart';
 import 'user_management_screen.dart';
-import 'login_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -21,22 +21,15 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
 
-  late final List<Widget> pages;
-
-  @override
-  void initState() {
-    super.initState();
-
-    pages = [
-      const DashboardScreen(),
-      const MedicinesScreen(),
-      const PrescriptionScreen(),
-      const PurchaseScreen(),
-      const SupplierScreen(),
-      const ExpensesScreen(),
-      const ReportsScreen(),
-    ];
-  }
+  late final List<Widget> pages = [
+    const DashboardScreen(),
+    const MedicinesScreen(),
+    const PrescriptionScreen(),
+    const PurchaseScreen(),
+    const SupplierScreen(),
+    const ExpensesScreen(),
+    const ReportsScreen(),
+  ];
 
   String get pageTitle {
     switch (selectedIndex) {
@@ -66,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(
-        builder: (_) => const LoginScreen(),
+        builder: (context) => const LoginScreen(),
       ),
       (route) => false,
     );
@@ -75,22 +68,19 @@ class _HomeScreenState extends State<HomeScreen> {
   void openUserManagement() {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (_) =>
-            const UserManagementScreen(),
+        builder: (context) => const UserManagementScreen(),
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    final user =
-        AuthService.instance.currentUser;
+    final user = AuthService.instance.currentUser;
 
     return Scaffold(
       appBar: AppBar(
         title: Text(pageTitle),
       ),
-
       drawer: Drawer(
         child: SafeArea(
           child: Column(
@@ -100,15 +90,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   user?.name ?? 'User',
                 ),
                 accountEmail: Text(
-                  '${user?.username ?? ''} • '
-                  '${user?.role ?? ''}',
+                  '${user?.username ?? ''} • ${user?.role ?? ''}',
                 ),
-                currentAccountPicture:
-                    const CircleAvatar(
-                  child: Icon(
-                    Icons.person,
-                    size: 32,
-                  ),
+                currentAccountPicture: const CircleAvatar(
+                  child: Icon(Icons.person),
                 ),
               ),
 
@@ -156,10 +141,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
               if (user?.isAdmin == true)
                 ListTile(
-                  leading:
-                      const Icon(Icons.people),
-                  title:
-                      const Text('User Management'),
+                  leading: const Icon(Icons.people),
+                  title: const Text('User Management'),
                   onTap: () {
                     Navigator.pop(context);
                     openUserManagement();
@@ -171,19 +154,14 @@ class _HomeScreenState extends State<HomeScreen> {
               const Divider(),
 
               ListTile(
-                leading: const Icon(
-                  Icons.logout,
-                ),
+                leading: const Icon(Icons.logout),
                 title: const Text('Logout'),
                 onTap: logout,
               ),
-
-              const SizedBox(height: 8),
             ],
           ),
         ),
       ),
-
       body: IndexedStack(
         index: selectedIndex,
         children: pages,
