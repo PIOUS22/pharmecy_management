@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'suppliers_screen.dart';
+
 import '../services/auth_service.dart';
 import 'medicines_screen.dart';
 import 'purchase_screen.dart';
@@ -96,7 +98,7 @@ class DashboardScreen extends StatelessWidget {
                     },
                   ),
 
-                  _menuCard(
+                  /*_menuCard(
                     context,
                     icon: Icons.business,
                     title: 'Suppliers',
@@ -104,7 +106,21 @@ class DashboardScreen extends StatelessWidget {
                       // Supplier screen
                       // will be connected later.
                     },
-                  ),
+                  ),*/
+                  _menuCard(
+  context,
+  icon: Icons.business,
+  title: 'Suppliers',
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) =>
+            const SuppliersScreen(),
+      ),
+    );
+  },
+),
 
                   _menuCard(
                     context,
